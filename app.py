@@ -164,14 +164,12 @@ def train():
 
 @app.route("/model/metrics", methods=["GET"])
 def get_metrics():
-    # In a real app, we'd store metrics in a DB or file. For now, let's just return placeholders or re-train (not ideal)
-    # Let's assume the user calls /train first. We'll return a message if model doesn't exist.
-    import os
-    if not os.path.exists("model.joblib"):
-        return jsonify({"error": "Model not trained yet"}), 404
-    # Re-running training to get metrics for this demo/test
-    from model_service import train_model
-    metrics = train_model()
+    import json
+    if not os.path.exists("metrics.json"):
+        return jsonify({"error": "Metrics not found"}), 404
+    
+    with open("metrics.json", "r") as f:
+        metrics = json.load(f)
     return jsonify(metrics)
 
 @app.route("/predict", methods=["POST"])
@@ -184,4 +182,4 @@ def predict():
     return jsonify(prediction)
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5001)
+    app.run(host="0.0.0.0", debug=True, port=5001)

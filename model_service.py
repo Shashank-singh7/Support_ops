@@ -1,6 +1,7 @@
 import pandas as pd
 import joblib
 import os
+import json
 from sklearn.model_selection import train_test_split
 from xgboost import XGBClassifier
 from sklearn.metrics import roc_auc_score, f1_score, confusion_matrix
@@ -57,6 +58,9 @@ def train_model():
         "f1": f1_score(y_test, y_pred),
         "confusion_matrix": confusion_matrix(y_test, y_pred).tolist()
     }
+    
+    with open("metrics.json", "w") as f:
+        json.dump(metrics, f)
     
     return metrics
 

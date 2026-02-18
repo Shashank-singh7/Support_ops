@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.db
+support_tickets.db
+*.joblib
+metrics.json
+data/*.csv
+.git
+.gitignore

@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     fetchStats();
     fetchDiagnostics();
+    fetchModelMetrics();
 
     document.getElementById('train-btn').addEventListener('click', async () => {
         const btn = document.getElementById('train-btn');
@@ -9,7 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const resp = await fetch('/train', { method: 'POST' });
             const data = await resp.json();
-            alert(`Model trained! AUC: ${data.metrics.auc.toFixed(2)}`);
+            alert(`Model trained!`);
+            updateMetricsUI(data.metrics);
         } catch (e) {
             alert('Training failed.');
         } finally {
@@ -128,5 +130,32 @@ async function fetchDiagnostics() {
         }
     } catch (e) {
         console.error('Failed to fetch diagnostics', e);
+    }
+}
+
+async function fetchModelMetrics() {
+    try {
+        const resp = await fetch('/model/metrics');
+        if (resp.ok) {
+            const data = await resp.json();
+            updateMetricsUI(data);
+        }
+    } catch (e) {
+        console.error('Failed to fetch model metrics', e);
+    }
+}
+
+function updateMetricsUI(metrics) {
+    if (!metrics) return;
+
+    document.getElementById('auc-value').innerText = metrics.auc.toFixed(3);
+    document.getElementById('f1-value').innerText = metrics.f1.toFixed(3);
+
+    const cm = metrics.confusion_matrix;
+    if (cm) {
+        document.getElementById('cm-00').innerText = cm[0][0];
+        document.getElementById('cm-01').innerText = cm[0][1];
+        document.getElementById('cm-10').innerText = cm[1][0];
+        document.getElementById('cm-11').innerText = cm[1][1];
     }
 }
