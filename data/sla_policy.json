@@ -1,0 +1,8 @@
+{
+  "sla_hours_by_priority": {
+    "low": 36,
+    "medium": 24,
+    "high": 12,
+    "urgent": 4
+  }
+}

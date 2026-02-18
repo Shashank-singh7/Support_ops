@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Ticket Insights</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Support Ticket Insights</h1>
+            <div style="display: flex; gap: 1rem;">
+                <button id="reingest-btn" style="background: var(--accent); color: var(--bg-dark);">Re-run
+                    Ingestion</button>
+                <button id="train-btn">Train Model</button>
+            </div>
+        </header>
+
+        <section class="dashboard-grid">
+            <div class="card">
+                <div class="stat-label">SLA Breach Rate</div>
+                <div class="stat-value" id="breach-rate">--%</div>
+            </div>
+            <div class="card">
+                <div class="stat-label">Total Tickets</div>
+                <div class="stat-value" id="total-tickets">--</div>
+            </div>
+            <div class="card">
+                <div class="stat-label">Median Res Time</div>
+                <div class="stat-value" id="median-res">--h</div>
+            </div>
+            <div class="card">
+                <div class="stat-label">95th Percentile</div>
+                <div class="stat-value" id="p95-res">--h</div>
+            </div>
+        </section>
+
+        <section class="dashboard-grid">
+            <div class="card">
+                <h3>Problem Customers</h3>
+                <table id="customer-table">
+                    <thead>
+                        <tr>
+                            <th>Customer ID</th>
+                            <th>Breach Rate</th>
+                            <th>Total Tickets</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>Predict SLA Breach</h3>
+                <form id="predict-form">
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select name="category">
+                            <option value="Billing">Billing</option>
+                            <option value="Login">Login</option>
+                            <option value="Bug">Bug</option>
+                            <option value="Feature">Feature</option>
+                            <option value="Performance">Performance</option>
+                            <option value="Integration">Integration</option>
+                            <option value="Security">Security</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Priority</label>
+                        <select name="priority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                            <option value="urgent">Urgent</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Channel</label>
+                        <select name="channel">
+                            <option value="email">Email</option>
+                            <option value="chat">Chat</option>
+                            <option value="phone">Phone</option>
+                            <option value="web">Web</option>
+                        </select>
+                    </div>
+                    <!-- Simplified for demo: assuming typical values for others -->
+                    <input type="hidden" name="region" value="NA">
+                    <input type="hidden" name="plan" value="pro">
+                    <input type="hidden" name="tenure_months" value="12">
+                    <input type="hidden" name="employees" value="100">
+
+                    <button type="submit" style="width: 100%;">Predict Probability</button>
+                </form>
+                <div id="prediction-result"></div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h3>Top Categories</h3>
+            <table id="category-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Volume</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <section class="card" style="margin-top: 2rem;">
+                <h3>Data Diagnostics</h3>
+                <div id="diagnostic-counts" style="display: flex; gap: 2rem; margin: 1rem 0; color: var(--text-muted);">
+                    <span>Total Tickets: <strong id="diag-tickets" style="color: white;">--</strong></span>
+                    <span>Dirty Rows: <strong id="diag-dirty" style="color: var(--danger);">--</strong></span>
+                </div>
+                <div id="diagnostic-issues"
+                    style="max-height: 200px; overflow-y: auto; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 0.5rem; font-size: 0.8rem; border: 1px solid rgba(255,255,255,0.05);">
+                    <ul id="issue-list" style="list-style: none; color: var(--text-muted);">
+                        <li>Run ingestion to see diagnostics...</li>
+                    </ul>
+                </div>
+            </section>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>
