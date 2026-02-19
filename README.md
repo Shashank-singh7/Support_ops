@@ -15,10 +15,10 @@ A web application that ingests support ticket data, provides technical insights,
    ```
    *The app runs on `http://127.0.0.1:5001`*
 
-3. **CLick on "Re-run Ingestion" button to get basic insights**
+3. **CLick on "Re-run Ingestion" button to get basic insights.**
   
 
-4. **Click on "Train Model" button to train model for prediction and get model metrics**
+4. **Click on "Train Model" button to train model for prediction and get model metrics.**
 
 
 5. **Use the dropdown to select values for Category, Priority and Channel and click on "Predict Probability" to get prediction.**
