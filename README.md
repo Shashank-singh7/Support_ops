@@ -6,7 +6,7 @@ A web application that ingests support ticket data, provides technical insights,
 
 1. **Install Dependencies**:
    ```bash
-   pip install flask pandas scikit-learn joblib xgboost
+   pip install -r requirements.txt
    ```
 
 2. **Run the Application**:
