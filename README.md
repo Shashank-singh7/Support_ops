@@ -26,16 +26,16 @@ A web application that ingests support ticket data, provides technical insights,
 
 ## Running with Docker
 
-1. **Build the image**:
+1. **Pull the image**:
    ```bash
-   docker build -t support-insights .
+   docker pull shashanksingh7/support-ops:latest
    ```
 
 2. **Run the container**:
    ```bash
-   docker run -p 5001:5001 support-insights
+   docker run -p 5001:5001 shashanksingh7/support-ops:latest
    ```
-   *Access the dashboard at `http://localhost:5001`*
+   
 
 ## Features
 
